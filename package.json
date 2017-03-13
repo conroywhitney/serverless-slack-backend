@@ -23,7 +23,9 @@
   "homepage": "https://github.com/conroywhitney/serverless-slack-backend",
   "dependencies": {
     "aws-sdk": "^2.22.0",
-    "babel-runtime": "^6.22.0"
+    "babel-runtime": "^6.22.0",
+    "graphql": "^0.9.1",
+    "vogels": "^2.2.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",
