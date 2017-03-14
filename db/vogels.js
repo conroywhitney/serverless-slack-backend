@@ -3,8 +3,8 @@ import vogels from 'vogels-promisified'
 
 import { isDevEnv } from '../utils/env'
 
-const localDynamo = () => {
-  console.log('vogels', 'localDynamo')
+const localDynamoDB = () => {
+  console.log('vogels', 'localDynamoDB')
 
   var opts = { endpoint: 'http://localhost:8000', apiVersion: '2012-08-10' }
   vogels.dynamoDriver(new AWS.DynamoDB(opts))
@@ -12,14 +12,19 @@ const localDynamo = () => {
   return vogels
 }
 
-const productionDynamo = () => {
-  console.log('vogels', 'productionDynamo', process.env.NODE_ENV)
+const productionDynamoDB = () => {
+  console.log('vogels', 'productionDynamoDB')
 
-  vogels.AWS.config.update({region: 'us-east-1'})
+  vogels.AWS.config.update({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    apiVersion: '2012-08-10',
+    region: 'us-east-1',
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+  })
 
   return vogels
 }
 
 export default isDevEnv
-  ? localDynamo()
-  : productionDynamo()
+  ? localDynamoDB()
+  : productionDynamoDB()
