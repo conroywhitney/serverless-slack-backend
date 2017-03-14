@@ -12,6 +12,7 @@ custom:
 provider:
   environment:
     DYNAMODB_TABLE: ${{self:service}}-${{self:provider.stage}}-messages
+    NODE_ENV: ${{self:provider.stage}}
   memorySize: 256
   name: aws
   profile: serverless-slack
