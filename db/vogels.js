@@ -3,6 +3,8 @@ import vogels from 'vogels-promisified'
 
 import { isDevEnv } from '../utils/env'
 
+if (isDevEnv) { require('dotenv').config() }
+
 const localDynamoDB = () => {
   console.log('vogels', 'localDynamoDB')
 
