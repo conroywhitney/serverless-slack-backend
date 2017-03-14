@@ -13,11 +13,13 @@ export default vogels.define('Message', {
   schema: {
     Topic: joi.string(),
     Timestamp: joi.date(),
-    authorName: joi.string(),
-    id: joi.string(),
-    text: joi.string(),
-    threadID: joi.string(),
-    threadName: joi.string(),
-    timestamp: joi.string()
+    payload: joi.object().keys({
+      authorName: joi.string(),
+      id: joi.string(),
+      text: joi.string(),
+      threadID: joi.string(),
+      threadName: joi.string(),
+      timestamp: joi.string()
+    })
   }
 })

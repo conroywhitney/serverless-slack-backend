@@ -1,4 +1,4 @@
-import { map, prop } from 'ramda'
+import { compose, map, prop } from 'ramda'
 
 import MessageModel from './model'
 
@@ -8,15 +8,14 @@ export function fetchAll ({ timestamp, topic }) {
   return (
     MessageModel
       .scan()
-      .attributes([
-        'authorName',
-        'id',
-        'text',
-        'threadID',
-        'threadName',
-        'timestamp'
-      ])
+      .attributes(['payload'])
       .execAsync()
-      .then(({ Items, Count, ScannedCount }) => map(prop('attrs'), Items))
+      .then(({ Items, Count, ScannedCount }) => {
+        console.log('fetchAll', 'Items', Items)
+
+        return compose(
+          map(prop('attrs'))
+        )(Items)
+      })
   )
 }
