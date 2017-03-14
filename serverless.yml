@@ -54,6 +54,9 @@ functions:
           path: graphql
           method: post
           cors: true
+          response:
+            headers:
+              Access-Control-Allow-Origin: "'*'"
 
 resources:
   Resources:
@@ -127,3 +130,4 @@ resources:
 
 plugins:
   - serverless-webpack
+  - serverless-dynamodb-local

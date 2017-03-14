@@ -1,12 +1,13 @@
 import MessageModel from './model'
 
 export async function fetchAll ({ timestamp, topic }) {
-  return (
+  console.log('fetchAll', 'timestamp', timestamp, 'topic', topic)
+
+  const response = await (
     MessageModel
       .scan()
-      .where('topic').equals(topic)
-      .where('timestamp').gte(timestamp)
       .attributes([
+        // 'payload'
         'authorName',
         'id',
         'text',
@@ -14,6 +15,17 @@ export async function fetchAll ({ timestamp, topic }) {
         'threadName',
         'timestamp'
       ])
-      .exec()
+      .execAsync()
+    )
+
+  const { Items, Count, ScannedCount } = await response
+
+  console.log(
+    'fetchAll', 'then',
+    'Items', Items,
+    'Count', Count,
+    'ScannedCount', ScannedCount
   )
+
+  return Items
 }

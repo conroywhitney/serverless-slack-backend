@@ -1,4 +1,3 @@
-import 'babel-polyfill' // needed to for async/await
 import {
   GraphQLInt,
   GraphQLList,
@@ -14,7 +13,7 @@ export default new GraphQLSchema({
     name: 'Root',
     description: 'Root of the Schema',
     fields: {
-      message: {
+      messages: {
         name: 'MessageQuery',
         description: 'Retrieve messages from a topic created after a timestamp',
         type: new GraphQLList(MessageSchema),
@@ -30,7 +29,15 @@ export default new GraphQLSchema({
         async resolve (_, args, ast) {
           const { timestamp, topic } = args
 
-          return await fetchAllMessages({ timestamp, topic })
+          console.log('graphql schema', 'resolve', 'timestamp', timestamp, 'topic', topic)
+
+          const messages = await fetchAllMessages({ timestamp, topic })
+
+          console.log('graphql schema', 'resolve', 'messages', messages)
+
+          return messages
+
+          // return [{ id: '123', text: 'abc' }]
         }
       }
     }
