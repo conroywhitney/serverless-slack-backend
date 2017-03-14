@@ -1,5 +1,4 @@
 import {
-  GraphQLInt,
   GraphQLObjectType,
   GraphQLString
 } from 'graphql'
@@ -12,6 +11,6 @@ export default new GraphQLObjectType({
     text: { type: GraphQLString },
     threadID: { type: GraphQLString },
     threadName: { type: GraphQLString },
-    timestamp: { type: GraphQLInt }
+    timestamp: { type: GraphQLString }
   }
 })

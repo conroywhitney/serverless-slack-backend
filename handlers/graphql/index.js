@@ -22,7 +22,11 @@ export default function handler (event, context, callback) {
   return graphql(Schema, query)
     .then(data => {
       console.log('graphql', 'then', 'data', data)
-      return response(200, data, callback)
+
+      const messages = data.data.messages
+      console.log('graphql', 'then', 'messages', messages)
+
+      return response(200, messages, callback)
     })
     .catch(error => {
       console.log('graphql', 'catch', 'error', error)

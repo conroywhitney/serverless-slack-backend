@@ -26,16 +26,16 @@ export default new GraphQLSchema({
             defaultValue: 0 // default to all messages since epoch
           }
         },
-        async resolve (_, args, ast) {
+        resolve (_, args, ast) {
           const { timestamp, topic } = args
 
           console.log('graphql schema', 'resolve', 'timestamp', timestamp, 'topic', topic)
 
-          const messages = await fetchAllMessages({ timestamp, topic })
+          return fetchAllMessages({ timestamp, topic })
 
-          console.log('graphql schema', 'resolve', 'messages', messages)
+          // console.log('graphql schema', 'resolve', 'messages', messages)
 
-          return messages
+          // return messages
 
           // return [{ id: '123', text: 'abc' }]
         }
